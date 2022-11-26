@@ -1,8 +1,9 @@
-from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
-#def index(request):
-#    return HttpResponse('Hola')
+from django.contrib.auth import authenticate
+from django.contrib.auth import login
+
+
 
 def index(request):
     return render(request, 'index.html',{
@@ -15,3 +16,19 @@ def index(request):
             ]
         }
     )
+
+
+def loginview(request):
+    if request.method == 'POST':
+        username = request.POST.get('username') #POST es un diccionario
+        password = request.POST.get('password')
+        
+        # el metodo authenticate busca en el DB username y password
+        user= authenticate(username=username, password=password)
+
+        if user:
+            login(request,user)
+            return redirect('index')
+
+
+    return render(request, 'users/login.html', )
