@@ -1,7 +1,8 @@
-from django.shortcuts import render, redirect
-
+from django.shortcuts import render
+from django.shortcuts import redirect
 from django.contrib.auth import authenticate
 from django.contrib.auth import login
+from django.contrib import messages
 
 
 
@@ -28,7 +29,10 @@ def loginview(request):
 
         if user:
             login(request,user)
+            messages.success(request, 'bienvenido {}'.format(user.username))
             return redirect('index')
+        else:
+            messages.error(request, 'Usuario no valido')
 
 
     return render(request, 'users/login.html', )
