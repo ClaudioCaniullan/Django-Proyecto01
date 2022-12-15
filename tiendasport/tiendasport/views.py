@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.contrib.auth import authenticate
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 from django.contrib import messages
+
+from .forms import RegistroForm
 
 
 
@@ -36,3 +38,16 @@ def loginview(request):
 
 
     return render(request, 'users/login.html', )
+
+
+def logoutview(request):
+    logout(request)
+    messages.success(request, 'sesion cerrada exitosamente')
+    return redirect('loginview')
+
+
+def registro(request):
+    form = RegistroForm()
+    return render(request,'users/registro.html', {
+        'form':form
+    })
