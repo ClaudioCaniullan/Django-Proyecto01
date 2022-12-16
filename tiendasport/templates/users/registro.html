@@ -15,16 +15,50 @@
 </head>
 
 <body>
-    <h2>Resgistro</h2>
 
-    <!-- formulario -->
-    <form method="post">
-        csrf_token
-        {{ form }} 
-        <button type='submit' class='btn btn-primary'>
-            Registrar
-        </button>
-    </form>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+
+                <h2>Resgistro</h2>
+
+                <!-- formulario -->
+                <form method="post">
+                 {% csrf_token %}
+
+                 <!--
+                    <div class="form-group">
+                        {{ form.username.label_tag }} 
+                        {{ form.username}}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.email.label_tag }} 
+                        {{ form.email}}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.password.label_tag }} 
+                        {{ form.password }}
+                    </div>
+                -->
+                <!-- simplificación del codigo anterior -->
+                {% for field in form %}
+                <div class="form-group">
+                    {{ field.label_tag }}
+                    {{ field }}
+                </div>
+                {% endfor%}
+                
+                    <button type='submit' class='btn btn-primary'>
+                        Registrar
+                    </button>
+                </form>
+    
+    
+           </div>
+        </div>
+    </div>
     
 
 </body>
