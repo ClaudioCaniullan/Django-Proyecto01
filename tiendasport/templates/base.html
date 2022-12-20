@@ -15,17 +15,12 @@
 
     <body>
 
+        {% include 'navbar.html' %}
+
         <div class="container">
 
-            {% if messages %}
-            {% for message in messages %}
-              <div class="alert {% if message.tags == 'success' %}alert-success{%else%}alert-danger{%endif%}">
-                  <button type="button" class="close" data-dismiss="alert">x</button>
-                  {{ message }}
-              </div>
-            {% endfor %}
-          {% endif %}
-          
+            {% include 'message.html' %}
+
             <div class="row">
                 {% block content  %}
                 {% endblock  %}
@@ -38,5 +33,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
 
     <script src="{% static 'js/main.js' %}"> </script>
+    <script src="https://kit.fontawesome.com/0cb0ed6031.js" crossorigin="anonymous"></script>
 
 </html>

@@ -1,0 +1,46 @@
+{% url 'loginview' as loginview %}
+{% url 'registro' as registro %}
+
+
+
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <a href="#" class="navbar-brand">TiendaSport</a>
+
+    <button type="button" name="button" class="navbar-toggler navbar-toggler-right" data-toggle="collapse" data-target="#navb">
+       <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navb" class="navbar-collapse collapse hide">
+      <ul class="nav navbar-nav ml-auto">
+
+
+        {% if user.is_authenticated %}
+
+            <li class="navbar-item">
+                <a href="{% url 'logoutview' %}" class="nav-link">
+                    <span class="fa-solid fa-arrow-right-from-bracket"></span>
+                    Logout
+                </a>
+            </li>
+
+        {% else%}
+
+            <li class="navbar-item {% if request.path == loginview %}active{% endif %}">
+                <a href="{{loginview}}" class="nav-link">
+                    <span class="fas fa-user"></span>
+                    Login
+                </a>
+            </li>
+
+            <li class="navbar-item {% if request.path == registro %}active{% endif %}">
+                <a href="{{registro}}" class="nav-link">
+                    <span class="fas fa-user-plus"></span>
+                    Registro
+                </a>
+            </li>
+
+        {% endif %}
+
+      </ul>
+    </div>
+</nav>
