@@ -33,7 +33,7 @@ class ProductDetailView(DetailView): #id == pk
     def get_context_data(self, **kwargs):
         # obtener el contexto de la clase padre
         context = super().get_context_data(**kwargs)
-        
-        print(context)
+        # ver resultado en consola
+        # print(context)
 
         return context
