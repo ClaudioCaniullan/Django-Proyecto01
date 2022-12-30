@@ -8,17 +8,17 @@ from django.contrib import messages
 
 from .forms import RegistroForm
 
+from products.models import Product
 
 
 def index(request):
+    
+    products = Product.objects.all().order_by('-id')
+    
     return render(request, 'index.html',{
         'message':'Listado de productos', 
         'title':'Productos',
-        'products': [
-            {'title':'Playera', 'price':5, 'stock':True},
-            {'title':'Camisa', 'price':7, 'stock':True},
-            {'title':'Mochila', 'price':20, 'stock':False}
-            ]
+        'products': products
         }
     )
 
