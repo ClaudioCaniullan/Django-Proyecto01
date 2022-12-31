@@ -1,5 +1,9 @@
 from django.db import models
 from django.utils.text import slugify
+from django.db.models.signals import pre_save
+
+
+
 # Create your models here.
 
 class Product(models.Model):
@@ -10,13 +14,23 @@ class Product(models.Model):
     # solo obtendremos productos atravez de su slug
     slug = models.SlugField(null=False, blank=False, unique=True)
     
-    # sobreescribimos el metodo para generar slug automaticos
-    def __str__(self, *args, **kwargs):
-        # generador de slug a partir del titulo del producto
-        self.slug = slugify(self.title)
-        super(Product, self).save(*args, **kwargs)
+    # sobreescribimos el metodo para generar slug automaticos cons slugify
+    #def __str__(self, *args, **kwargs):
+    #   # generador de slug a partir del titulo del producto
+    #   self.slug = slugify(self.title)
+    #   super(Product, self).save(*args, **kwargs)
     
     # sobreescribimos este metodo para que que aparezca el producto con sus atributos
     def __str__(self):
         return self.title
+    
+# callbug que se encarga de generar nuevos slug
+def set_slug(sender, instance, *args, **kwargs):
+    instance.slug = slugify(instance.title)
+ 
+# registrar el callbug usando pre_save
+# le indicamos a Django que cuando antes que un objeto product se 
+# almacene debe ejecutar el callbug set_slug 
+pre_save.connect(set_slug, sender=Product)
+    
     
