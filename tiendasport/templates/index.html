@@ -4,22 +4,31 @@
   
       <div class="col">
 
-        <h1>{{message}}</h1>
+        <h4 class="text-center">{{message}}</h4>
 
-        {# listar nombre del producto y stack #}
+        {# listado de productos #}
     
-        <ul class="list-group">
-            {% for product in products %}
-
-            <li class="list-group-item">{{product.title}}
+        <div class="row">
+          {% for product in products %}
+            <div class="col-3 mt-5">
+              <!-- product-->
+              <div class="card h-100">
+                {% if product.image %}
+                  <img src="{{ product.image.url }}" alt="imagen del producto" height="300">
+                {% endif %}
                 
-                  
-              <span class="text-success">{{ product.price}}</span>
-          
-            </li>
-            {% endfor %}
-      
-        </ul>
+                <div class="card-body">
+                  <h5 class="card-title">{{ product.title}}</h5>
+                  <p class="card-text"> {{ product.description}}</p>
+                  <a href="#" class="btn btn-primary"> Ver más </a>
+                </div>
+
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+
+
       
       </div>
 

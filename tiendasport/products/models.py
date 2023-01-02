@@ -16,6 +16,7 @@ class Product(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     # solo obtendremos productos atravez de su slug
     slug = models.SlugField(null=False, blank=False, unique=True)
+    image = models.ImageField(upload_to='products/', null=False, blank=False)
     
     # sobreescribimos el metodo para generar slug automaticos cons slugify
     #def __str__(self, *args, **kwargs):
@@ -44,4 +45,4 @@ def set_slug(sender, instance, *args, **kwargs):
 # almacene debe ejecutar el callbug set_slug 
 pre_save.connect(set_slug, sender=Product)
     
-    
+     

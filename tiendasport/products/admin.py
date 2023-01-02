@@ -6,7 +6,7 @@ from .models import Product
 # de nuestro producto en el Administrador
 class ProductAdmin(admin.ModelAdmin):
     # indicamos los campos a visualizar en el admin
-    fields = ('title', 'description', 'price')
+    fields = ('title', 'description', 'price', 'image')
     # atributos que queremos mostrar del producto en admin
     list_display = ('__str__', 'slug', 'created_at')
     
