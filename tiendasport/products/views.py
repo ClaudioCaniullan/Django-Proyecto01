@@ -1,5 +1,8 @@
 from django.shortcuts import render
 
+# esta clase nos permite ejecutar consultas aplicando diferentes filtros
+from django.db.models import Q 
+
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 
@@ -44,8 +47,10 @@ class ProductSearchListView(ListView):
     
     # sobreescribir el metodo get_queryset para retornar queryset
     def get_queryset(self):
+        # buscaremos elementos tanto por titulo o por su categoria
+        filters = Q(title__icontains = self.query()) | Q(category__title__icontains=self.query())
         # SELECT * FROM products WHERE title like %valor%
-        return Product.objects.filter(title__icontains=self.query())
+        return Product.objects.filter(filters)
     
     def query(self):
         return self.request.GET.get('q')
