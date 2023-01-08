@@ -37,3 +37,27 @@ class ProductDetailView(DetailView): #id == pk
         # print(context)
 
         return context
+    
+    
+class ProductSearchListView(ListView):
+    template_name = 'products/search.html'
+    
+    # sobreescribir el metodo get_queryset para retornar queryset
+    def get_queryset(self):
+        # SELECT * FROM products WHERE title like %valor%
+        return Product.objects.filter(title__icontains=self.query())
+    
+    def query(self):
+        return self.request.GET.get('q')
+    
+    
+    # sobre escribir el metodo get_context_data
+    # este método pasa el contexto de la clase al template
+    def get_context_data(self, **kwargs):
+        # obtener el contexto de la clase padre
+        context = super().get_context_data(**kwargs)
+        context['products'] = context['product_list']
+        context["query"] = self.query()
+        context['count'] = context['product_list'].count()
+        return context
+    
