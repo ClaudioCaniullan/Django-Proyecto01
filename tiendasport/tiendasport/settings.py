@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'products',
     'categories',
+    'users'
 ]
 
 MIDDLEWARE = [
@@ -53,6 +54,9 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'tiendasport.urls'
+
+# Le indicamos a django que vamos a usar el modelo User que hemos creado en vez del User nativo
+AUTH_USER_MODEL = 'users.User'
 
 TEMPLATES = [
     {

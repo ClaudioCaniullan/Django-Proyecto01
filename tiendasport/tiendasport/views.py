@@ -3,8 +3,11 @@ from django.shortcuts import redirect
 
 from django.contrib.auth import authenticate
 from django.contrib.auth import login, logout
-from django.contrib.auth.models import User
 from django.contrib import messages
+
+# vamos a usar el modelo User creado por nosotros
+#from django.contrib.auth.models import User 
+from users.models import User
 
 from .forms import RegistroForm
 

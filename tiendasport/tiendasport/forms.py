@@ -1,6 +1,8 @@
 from django import forms
 
-from django.contrib.auth.models import User 
+# vamos a usar el modelo User creado por nosotros
+#from django.contrib.auth.models import User 
+from users.models import User
 
 class RegistroForm(forms.Form):
     username = forms.CharField(required=True,
