@@ -31,7 +31,8 @@ urlpatterns = [
     path('usuarios/login', views.loginview, name='loginview'),
     path('usuarios/logout', views.logoutview, name='logoutview'),
     path('usuarios/registro', views.registro, name='registro'),
-    path('productos/', include('products.urls'),), # vamos ausar las urls de la app products
+    path('productos/', include('products.urls')), # vamos ausar las urls de la app products y carts
+    path('carrito/', include('carts.urls')),
 ]
 
 # esta condicion nos permite mostrar imagenes en nuestros tamplates
